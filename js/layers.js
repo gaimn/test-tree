@@ -18,7 +18,9 @@ addLayer("p", {
         return mult
     },
     gainExp() { // Calculate the exponent on main currency from bonuses
-        return new Decimal(1)
+        power = new Decimal(1)
+	if (hasUpgrade('e', 11)) power = power.add(10)
+	return power
     },
     row: 0, // Row the layer is in on the tree (0 is the first row)
     hotkeys: [
@@ -74,7 +76,14 @@ addLayer("e", {
         return new Decimal(1)
     },
     row: 1, // Row the layer is in on the tree (0 is the first row)
-    layerShown(){return true}
+    layerShown(){return true},
+    upgrades: {
+        11: {
+    	    title: "Lots of prestige points!",
+    	    description: "^1.1 prestige points.",
+    	    cost: new Decimal(1),
+        },
+    },
 })
 addLayer("r", {
     name: "reaction", // This is optional, only used in a few places, If absent it just uses the layer id.
