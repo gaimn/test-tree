@@ -28,7 +28,14 @@ addLayer("p", {
 	"energize",
 	"reaction",
     ],
-    layerShown(){return true}
+    layerShown(){return true},
+    upgrades: {
+        11: {
+    	    title: "Point Power!",
+    	    description: "Triple point gain.",
+    	    cost: new Decimal(10),
+        },
+    },
 })
 addLayer("e", {
     name: "energize", // This is optional, only used in a few places, If absent it just uses the layer id.
