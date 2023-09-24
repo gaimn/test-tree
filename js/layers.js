@@ -38,7 +38,12 @@ addLayer("p", {
 	12: {
     	    title: "Slight Advantage",
     	    description: "Double point gain.",
-    	    cost: new Decimal(25),
+    	    cost: new Decimal(15),
+        },
+	13: {
+    	    title: "It never stops!",
+    	    description: "Multiply points by prestige points.",
+    	    cost: new Decimal(35),
         },
     },
 })
