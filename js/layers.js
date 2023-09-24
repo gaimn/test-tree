@@ -44,6 +44,10 @@ addLayer("p", {
     	    title: "It never stops!",
     	    description: "Multiply points by prestige points.",
     	    cost: new Decimal(35),
+	    effect() {
+                return player[this.layer].points.add(1).pow(0.5)
+    	    },
+            effectDisplay() { return format(upgradeEffect(this.layer, this.id))+"x" },
         },
     },
 })
