@@ -19,7 +19,7 @@ addLayer("p", {
     },
     gainExp() { // Calculate the exponent on main currency from bonuses
         power = new Decimal(1)
-	if (hasUpgrade('e', 11)) power = power.add(10)
+	if (hasUpgrade('e', 11)) power = power.add(0.1)
 	return power
     },
     row: 0, // Row the layer is in on the tree (0 is the first row)
