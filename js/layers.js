@@ -83,6 +83,11 @@ addLayer("e", {
     	    description: "^1.1 prestige points.",
     	    cost: new Decimal(1),
         },
+	12: {
+    	    title: "Generator",
+    	    description: "Get more points based on electricity.",
+    	    cost: new Decimal(7),
+        },
     },
 })
 addLayer("r", {
