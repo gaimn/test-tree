@@ -87,6 +87,10 @@ addLayer("e", {
     	    title: "Generator",
     	    description: "Get more points based on electricity.",
     	    cost: new Decimal(7),
+	    effect() {
+                return player[this.layer].points.add(1).pow(0.166)
+    	    },
+            effectDisplay() { return format(upgradeEffect(this.layer, this.id))+"x" },
         },
     },
 })
