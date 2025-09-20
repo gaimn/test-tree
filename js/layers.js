@@ -19,6 +19,7 @@ addLayer("p", {
     },
     gainExp() { // Calculate the exponent on main currency from bonuses
         power = new Decimal(1)
+	if (hasUpgrade('p', 13)) power = power.times(upgradeEffect('p', 13))
 	if (hasUpgrade('e', 11)) power = power.add(0.1)
 	return power
     },
@@ -37,23 +38,22 @@ addLayer("p", {
     	    description: "Triple point gain.",
     	    cost: new Decimal(3),
         },
-	12: {
+		12: {
     	    title: "Slight Advantage",
     	    description: "Double point gain.",
     	    cost: new Decimal(5),
         },
-	13: {
-    	    title: "It never stops!",
-    	    description: "Multiply points by prestige points.",
-    	    cost: new Decimal(35),
-	    	effect() {
-                return player[this.layer].points.add(1).pow(0.5)
+		13: {
+    	    title: "Unusual",
+    	    description: "Prestige points boost themselves.",
+    	    cost: new Decimal(12),
+			effect() {
+                return player[this.layer].points.add(1).log10()
     	    },
             effectDisplay() { return format(upgradeEffect(this.layer, this.id))+"x" },
         },
-    },
-	24: {
-    	    title: "AAAAAAAHHHHHHH!",
+		21: {
+    	    title: "It never stops!",
     	    description: "Multiply points by prestige points.",
     	    cost: new Decimal(35),
 	    	effect() {
