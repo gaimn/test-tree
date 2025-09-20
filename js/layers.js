@@ -149,7 +149,7 @@ addLayer("r", {
         return new Decimal(1)
     },
     row: 1, // Row the layer is in on the tree (0 is the first row)
-    layerShown(){return true}
+    layerShown(){return player.p.points.cmp(10) >= 0}
 })
 
 addLayer("x", {
@@ -174,6 +174,6 @@ addLayer("x", {
     gainExp() { // Calculate the exponent on main currency from bonuses
         return new Decimal(1)
     },
-    row: 2, // Row the layer is in on the tree (0 is the first row)
-    layerShown(){return true}
+    row: 10, // Row the layer is in on the tree (0 is the first row)
+    layerShown(){return player.p.points.cmp(300) >= 0}
 })
