@@ -94,7 +94,7 @@ addLayer("e", {
     requires: new Decimal(25), // Can be a function that takes requirement increases into account
     resource: "electricity", // Name of prestige currency
     baseResource: "prestige points", // Name of resource prestige is based on
-    baseAmount() {return player.e.points}, // Get the current amount of baseResource
+    baseAmount() {return player.p.points}, // Get the current amount of baseResource
     type: "normal", // normal: cost to gain currency depends on amount gained. static: cost depends on how much you already have
     exponent: 0.5, // Prestige currency exponent
     gainMult() { // Calculate the multiplier for main currency from bonuses
@@ -123,6 +123,7 @@ addLayer("e", {
             effectDisplay() { return format(upgradeEffect(this.layer, this.id))+"x" },
         },
     },
+    layerShown(){return player.p.points.cmp(10) >= 0}
 })
 
 addLayer("r", {
@@ -137,7 +138,7 @@ addLayer("r", {
     requires: new Decimal(500), // Can be a function that takes requirement increases into account
     resource: "booster", // Name of prestige currency
     baseResource: "prestige points", // Name of resource prestige is based on
-    baseAmount() {return player.r.points}, // Get the current amount of baseResource
+    baseAmount() {return player.p.points}, // Get the current amount of baseResource
     type: "normal", // normal: cost to gain currency depends on amount gained. static: cost depends on how much you already have
     exponent: 0.5, // Prestige currency exponent
     gainMult() { // Calculate the multiplier for main currency from bonuses
@@ -149,7 +150,7 @@ addLayer("r", {
         return new Decimal(1)
     },
     row: 1, // Row the layer is in on the tree (0 is the first row)
-    layerShown(){return player.p.points.cmp(10) >= 0}
+    layerShown(){return player.p.points.cmp(300) >= 0}
 })
 
 addLayer("x", {
@@ -175,5 +176,4 @@ addLayer("x", {
         return new Decimal(1)
     },
     row: 10, // Row the layer is in on the tree (0 is the first row)
-    layerShown(){return player.p.points.cmp(300) >= 0}
 })
