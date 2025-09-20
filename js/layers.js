@@ -40,7 +40,7 @@ addLayer("p", {
 	12: {
     	    title: "Slight Advantage",
     	    description: "Double point gain.",
-    	    cost: new Decimal(15),
+    	    cost: new Decimal(5),
         },
 	13: {
     	    title: "It never stops!",
