@@ -42,17 +42,33 @@ addLayer("p", {
     	    description: "Double point gain.",
     	    cost: new Decimal(5),
         },
+	12: {
+    	    title: "Slight Advantage",
+    	    description: "Double point gain.",
+    	    cost: new Decimal(5),
+        },
 	13: {
     	    title: "It never stops!",
     	    description: "Multiply points by prestige points.",
     	    cost: new Decimal(35),
-	    effect() {
+	    	effect() {
+                return player[this.layer].points.add(1).pow(0.5)
+    	    },
+            effectDisplay() { return format(upgradeEffect(this.layer, this.id))+"x" },
+        },
+    },
+	24: {
+    	    title: "AAAAAAAHHHHHHH!",
+    	    description: "Multiply points by prestige points.",
+    	    cost: new Decimal(35),
+	    	effect() {
                 return player[this.layer].points.add(1).pow(0.5)
     	    },
             effectDisplay() { return format(upgradeEffect(this.layer, this.id))+"x" },
         },
     },
 })
+
 addLayer("e", {
     name: "energize", // This is optional, only used in a few places, If absent it just uses the layer id.
     symbol: "E", // This appears on the layer's node. Default is the id with the first letter capitalized
@@ -94,6 +110,7 @@ addLayer("e", {
         },
     },
 })
+
 addLayer("r", {
     name: "reaction", // This is optional, only used in a few places, If absent it just uses the layer id.
     symbol: "R", // This appears on the layer's node. Default is the id with the first letter capitalized
