@@ -15,13 +15,13 @@
     exponent: 0.5, // Prestige currency exponent
     gainMult() { // Calculate the multiplier for main currency from bonuses
         mult = new Decimal(1)
+		if (hasUpgrade('p', 13)) mult = mult.times(upgradeEffect('p', 13))
+		if (hasUpgrade('e', 11)) mult = mult.add(0.1)
         return mult
     },
     gainExp() { // Calculate the exponent on main currency from bonuses
         power = new Decimal(1)
-	if (hasUpgrade('p', 13)) power = power.times(upgradeEffect('p', 13))
-	if (hasUpgrade('e', 11)) power = power.add(0.1)
-	return power
+		return power
     },
     row: 0, // Row the layer is in on the tree (0 is the first row)
     hotkeys: [
@@ -46,7 +46,7 @@
 		13: {
     	    title: "Unusual",
     	    description: "Prestige points boost themselves.",
-    	    cost: new Decimal(12),
+    	    cost: new Decimal(8),
 			effect() {
                 return player[this.layer].points.add(1).log10().add(1)
     	    },
@@ -55,9 +55,27 @@
 		21: {
     	    title: "It never stops!",
     	    description: "Multiply points by prestige points.",
-    	    cost: new Decimal(35),
+    	    cost: new Decimal(20),
 	    	effect() {
                 return player[this.layer].points.add(1).pow(0.5)
+    	    },
+            effectDisplay() { return format(upgradeEffect(this.layer, this.id))+"x" },
+        },
+		22: {
+    	    title: "Link #1",
+    	    description: "Boost Electricity based on your current points.",
+    	    cost: new Decimal(75),
+	    	effect() {
+                return player[this.layer].points.add(1).pow(0.2)
+    	    },
+            effectDisplay() { return format(upgradeEffect(this.layer, this.id))+"x" },
+        },
+		23: {
+    	    title: "Link #2",
+    	    description: "Boost Reactions based on your current points.",
+    	    cost: new Decimal(1500),
+	    	effect() {
+                return player[this.layer].points.add(1).pow(0.2)
     	    },
             effectDisplay() { return format(upgradeEffect(this.layer, this.id))+"x" },
         },
@@ -81,6 +99,7 @@ addLayer("e", {
     exponent: 0.5, // Prestige currency exponent
     gainMult() { // Calculate the multiplier for main currency from bonuses
         mult = new Decimal(1)
+		if (hasUpgrade('p', 22)) mult = mult.times(upgradeEffect('p', 22))
         return mult
     },
     gainExp() { // Calculate the exponent on main currency from bonuses
@@ -94,11 +113,11 @@ addLayer("e", {
     	    description: "^1.1 prestige points.",
     	    cost: new Decimal(1),
         },
-	12: {
+		12: {
     	    title: "Generator",
     	    description: "Get more points based on electricity.",
     	    cost: new Decimal(7),
-	    effect() {
+	    	effect() {
                 return player[this.layer].points.add(1).pow(0.166)
     	    },
             effectDisplay() { return format(upgradeEffect(this.layer, this.id))+"x" },
@@ -123,6 +142,7 @@ addLayer("r", {
     exponent: 0.5, // Prestige currency exponent
     gainMult() { // Calculate the multiplier for main currency from bonuses
         mult = new Decimal(1)
+		if (hasUpgrade('p', 23)) mult = mult.times(upgradeEffect('p', 23))
         return mult
     },
     gainExp() { // Calculate the exponent on main currency from bonuses
