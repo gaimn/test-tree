@@ -48,7 +48,7 @@
     	    description: "Prestige points boost themselves.",
     	    cost: new Decimal(12),
 			effect() {
-                return player[this.layer].points.log10().add(1)
+                return player[this.layer].points.add(1).log10().add(1)
     	    },
             effectDisplay() { return format(upgradeEffect(this.layer, this.id))+"x" },
         },
