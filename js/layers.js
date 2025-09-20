@@ -1,4 +1,75 @@
- addLayer("p", {
+addLayer("a", {
+        startData() { return {
+            unlocked: true,
+        }},
+        color: "yellow",
+        row: "side",
+		symbol: "🏆",
+        layerShown() {return true}, 
+        tooltip() { // Optional, tooltip displays when the layer is locked
+            return ("Achievements")
+        },
+		requires: new Decimal(0),
+		baseResource: "points",
+		baseAmount() {return player.points},
+        achievements: {
+            rows: 5,
+            cols: 7,
+            11: {
+                name: "Welcome!",
+                done() { return player.p.points.gte(1) },
+                tooltip: "Perform a Prestige reset.",
+            },
+			12: {
+                name: "Slight Progression",
+                done() { return player.p.points.gte(10) },
+                tooltip: "Get 10 Prestige Points.",
+            },
+			13: {
+                name: "Higher Existence",
+                done() { return player.e.points.gte(1) },
+                tooltip: "Perform an Electrify, starting Row 2.",
+            },
+			14: {
+                name: "Working Upwards",
+                done() { return player.p.points.gte(250) },
+                tooltip: "Get 250 Prestige Points.",
+            },
+			15: {
+                name: "Reactive",
+                done() { return player.r.points.gte(1) },
+                tooltip: "Perform a Reaction.",
+            },
+            21: {
+                name: "Decked Out",
+                done() {
+                    var result = false
+                    for (var i = 1; i < 3; i++) {
+                        for (var j = 1; j < 2; j++) {
+                            result = result && player.p.upgrades.includes(Number(i + "" + j))
+                        }
+                    }
+
+                    return result
+                },
+                tooltip: "Get the first 6 Prestige upgrades."
+            },
+			22: {
+                name: "Yet again...",
+                done() { return player.p.points.gte(5000) },
+                tooltip: "Get 5000 Prestige Points"
+            }
+		},
+		tabFormat: [
+			"blank", 
+			["display-text", function() { return "You have "+player.a.achievements.length+" achievements."}], 
+			"blank", "blank",
+			"achievements",
+		],
+    }, 
+)
+
+addLayer("p", {
     name: "prestige", // This is optional, only used in a few places, If absent it just uses the layer id.
     symbol: "P", // This appears on the layer's node. Default is the id with the first letter capitalized
     position: 0, // Horizontal position within a row. By default it uses the layer id and sorts in alphabetical order
@@ -136,7 +207,7 @@ addLayer("r", {
     }},
     color: "#6E9E4E",
     requires: new Decimal(500), // Can be a function that takes requirement increases into account
-    resource: "booster", // Name of prestige currency
+    resource: "reactions", // Name of prestige currency
     baseResource: "prestige points", // Name of resource prestige is based on
     baseAmount() {return player.p.points}, // Get the current amount of baseResource
     type: "normal", // normal: cost to gain currency depends on amount gained. static: cost depends on how much you already have
