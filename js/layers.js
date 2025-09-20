@@ -19,7 +19,7 @@ addLayer("p", {
     },
     gainExp() { // Calculate the exponent on main currency from bonuses
         power = new Decimal(1)
-	if (hasUpgrade('p', 13)) power = power.times(upgradeEffect('p', 13))
+	if (hasUpgrade('p', 13)) power = power.times(upgradeEffect('p', 13)).log10()
 	if (hasUpgrade('e', 11)) power = power.add(0.1)
 	return power
     },
